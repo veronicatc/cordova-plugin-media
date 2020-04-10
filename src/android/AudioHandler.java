@@ -178,8 +178,13 @@ public class AudioHandler extends CordovaPlugin {
             float f = this.getCurrentAmplitudeAudio(args.getString(0));
             callbackContext.sendPluginResult(new PluginResult(status, f));
             return true;
-        }
-        else { // Unrecognized action.
+        } else if (action.equals("setRate")) {
+           try {
+               this.setRate(args.getString(0), Float.parseFloat(args.getString(1)));
+           } catch (NumberFormatException nfe) {
+               //no-op
+           }           
+        } else { // Unrecognized action.
             return false;
         }
 
