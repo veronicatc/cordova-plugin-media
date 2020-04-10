@@ -492,6 +492,23 @@ public class AudioHandler extends CordovaPlugin {
         }
     }
 
+ /**
+   * Set the play rate
+   *
+   * @param id     The id of the audio player
+   * @param rate Play rate to adjust to 0.0f - 1.0f
+   */
+  public void setRate(String id, float rate) {
+    String TAG3 = "AudioHandler.setRate(): Error : ";
+
+    AudioPlayer audio = this.players.get(id);
+    if (audio != null) {
+      audio.setRate(rate);
+    } else {
+      LOG.e(TAG3, "Unknown Audio Player " + id);
+    }
+  }       
+       
     private void onFirstPlayerCreated() {
         origVolumeStream = cordova.getActivity().getVolumeControlStream();
         cordova.getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
